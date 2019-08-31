@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+    <body>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="static/css/style3.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style> 
+    .caption
+    {
+ 
+  height:224px;
+   overflow:auto;
+    background:#fff;
+}</style> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+ 
+    <link href="//getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    
+    <style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Float four col-sm-4 col-md-4s side by side */
+.col-sm-4 col-md-4 {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {margin: 0 -5px;}
+
+/* Clear floats after the col-sm-4 col-md-4s */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive col-sm-4 col-md-4s */
+@media screen and (max-width: 600px) {
+  .col-sm-4 col-md-4 {
+    width: 100%;
+    display: block;
+    <!-- display: table-cell; -->
+    margin-bottom: 20px;
+  }
+}
+
+/* Style the counter thumbnails */
+.thumbnail {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+  bottom-margin: 10px;
+  
+}
+</style>
+    
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>   
+
+        <script language="javascript">
+            function CreateThumb(Headline,URL,Image,Category,Gen_summary)
+            {
+                var mainDiv = $('<div>').attr('class','col-sm-4 col-md-4');
+                var thumbNail = $('<div>').attr('class','thumbnail');
+                var img = $('<img>').attr({'src':Image,'data-holder-rendered':true,'style':'height: 200px; width: 250px; display: block'});
+                var caption = $('<div>').attr('class','caption');
+                var Headline = $('<h3>').text(Headline);
+                var Gen_summary = $('<p>').text(Gen_summary);
+                var link =$('<a>').attr('href',URL).text('Read Full Article Here');
+                caption.append(Headline);
+                caption.append(Gen_summary);
+                caption.append(link)
+                thumbNail.append(img);
+                thumbNail.append(caption);
+                mainDiv.append(thumbNail);
+                return mainDiv;		
+            }
+        </script>
+        <script>
+            $(function() {
+                    $.ajax({
+                    url: '/getAllNews',
+                    type: 'GET',
+                    success: function(response) {
+                    var data = JSON.parse(response);
+                    var itemsPerRow = 0;
+                    var div = $('<div>').attr('class', 'row');
+                    for (var i = 0; i < data.length; i++) {
+                        if (itemsPerRow < 3) {
+                            if (i == data.length - 1) {
+                                div.append(CreateThumb(data[i].Headline,data[i].URL, data[i].Image, data[i].Category,data[i].Gen_summary));
+                                $('.well').append(div);
+                            }else {
+                                div.append(CreateThumb(data[i].Headline,data[i].URL, data[i].Image, data[i].Category,data[i].Gen_summary));
+                                itemsPerRow++;
+                            }
+                            } else {
+                                $('.well').append(div);
+                                div = $('<div>').attr('class', 'row');
+                                div.append(CreateThumb(data[i].Headline,data[i].URL, data[i].Image, data[i].Category,data[i].Gen_summary));
+                                if (i == data.length - 1) {
+                                    $('.well').append(div);
+                                }
+                                itemsPerRow = 1;
+                                }
+                            }
+                    console.log(response);
+                    },
+        error: function(error) {
+            console.log(error);
+            }
+            });
+        })
+        </script>
+        <div class="well">
+        <div class="row">
+        <div class="col-sm-4 col-md-4">
+        <div class="thumbnail"><img src="static/img/News.png" data-holder-rendered="true" style="height: 200px; width: 250px; display: block"></img>
+        <div class="caption">
+            <h2> Read Summaries for the Category "News" </h2>
+            
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        
+        
+
+    </body>
+</html>

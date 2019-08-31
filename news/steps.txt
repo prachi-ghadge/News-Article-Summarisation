@@ -1,0 +1,13 @@
+(base) C:\Users\warut>cd downloads
+
+(base) C:\Users\warut\Downloads>cd FLASK_APP
+
+(base) C:\Users\warut\Downloads\FLASK_APP>set FLASK_APP=main_page.py
+
+(base) C:\Users\warut\Downloads\FLASK_APP>flask run
+ * Serving Flask app "main_page.py"
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)

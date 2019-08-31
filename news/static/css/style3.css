@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+body
+{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto Condensed', sans-serif;
+    background: #262626 !important;
+}
+.heading{
+    color: white
+}
+section
+{
+    padding: 100px 0 0;
+}
+
+h1  {
+font-family: arial, sans-serif;
+font-size: 16px;
+font-weight: bold;
+margin-top: 0px;
+margin-bottom: 1px;
+}
+.card
+{
+    position: relative;
+    max-height: 180px; 
+    overflow: hidden; 
+    box-shadow: 0 5px 15px rgba(0,0,0,.5);
+    margin-bottom: 30px !important;
+}
+
+.card .post-image
+{
+    overflow: hidden;
+    
+}
+.card .post-image img
+{
+    width: 100%;
+   height: 40vh;
+   object-fit: cover;
+   /* width: 100%; /*
+    height: 20%;
+    /* height: 100% */
+    /* transition: .5s;
+    object-fit: cover;
+    border-radius: 8px;  */
+}
+.card:hover .post-image img
+{
+    transform: scale(1.2) translateY(-50px);
+}
+.card .news-content
+{
+    position: absolute;
+    bottom: -150px;
+    padding: 20px;
+    background: #fff;
+    transition: .5s;
+    max-height: 70%;
+
+}
+.card:hover .news-content
+{
+    bottom: 0;
+}
+.card .category
+{
+    position: absolute;
+    top: -30px;
+    left: 0;
+    height: 30px;
+    line-height: 30px;
+    background: #00b8f4;
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+    padding: 5px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: .5s;
+}
+.card .news-content .post-meta a
+{
+    text-decoration: none;
+    padding-right: 10px;
+    color: #262626;
+    font-weight: bold;
+    transition: .5s; 
+}
+.card .news-content:hover{
+    max-height: 90%
+}
+.card .news-content .post-meta a:hover
+{
+    color: #df084a;
+    min-height: 70%;
+}
+.card .news-content .post-header
+{
+    margin: 0;
+    padding: 10px 0;
+    color: #007da6;
+    height: 75px;
+    font-size: 28px;
+    overflow: hidden;
+}
+.card .news-content p
+{
+    font-size: 16px;
+    margin: 10px 0 0;
+    padding: 0;
+    color: #262626;
+    transition: .5s;
+    opacity: 0;
+}
+.card:hover .news-content p
+{
+    opacity: 1;
+}
+.img {
+    position: relative;
+    float: left;
+    width:  100px;
+    height: 100px;
+    background-position: 50% 50%;
+    background-repeat:   no-repeat;
+    background-size:     cover;
+}

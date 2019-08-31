@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <body>
+    
+ 
+    <link href="//getbootstrap.com/examples/jumbotron-narwell/jumbotron-narwell.css" rel="stylesheet">
+    <style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Float four columns side by side */
+.col-sm-4 col-md-4 {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.well {margin: 0 -5px;}
+
+/* Clear floats after the columns */
+.well:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .col-sm-4 col-md-4 {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+/* Style the counter thumbnails */
+.thumbnail {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+  bottom-margin: 10px;
+}
+
+</style>
+    
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>   
+
+        <script language="javascript">
+            function CreateThumb(Headline,URL,Image,Category,Gen_summary)
+            {
+                var mainDiv = $('<div>').attr('class','col-sm-4 col-md-4');
+                var thumbNail = $('<div>').attr('class','thumbnail');
+                var img = $('<img>').attr({'src':Image,'data-holder-rendered':true,'style':'height: 200px; width: 200px; display: block'});
+                var caption = $('<div>').attr('class','caption');
+                var Headline = $('<h3>').text(Headline);
+                var Gen_summary = $('<p>').text(Gen_summary);
+                var link =$('<a>').attr('href',URL).text('Read Full Article Here');
+                caption.append(Headline);
+                caption.append(Gen_summary);
+                caption.append(link)
+                thumbNail.append(img);
+                thumbNail.append(caption);
+                mainDiv.append(thumbNail);
+                return mainDiv;		
+            }
+        </script>
+        <script>
+            $(function() {
+                    $.ajax({
+                    url: '/getAllNews',
+                    type: 'GET',
+                    success: function(response) {
+                    var data = JSON.parse(response);
+                    var itemsPerwell = 0;
+                    var div = $('<div>').attr('class', 'well');
+                    for (var i = 0; i < data.length; i++) {
+                        if (itemsPerwell < 3) {
+                            if (i == data.length - 1) {
+                                div.append(CreateThumb(data[i].Headline,data[i].URL, data[i].Image, data[i].Category,data[i].Gen_summary));
+                                $('.well').append(div);
+                            }else {
+                                div.append(CreateThumb(data[i].Headline,data[i].URL, data[i].Image, data[i].Category,data[i].Gen_summary));
+                                itemsPerwell++;
+                            }
+                            } else {
+                                $('.well').append(div);
+                                div = $('<div>').attr('class', 'well');
+                                div.append(CreateThumb(data[i].Headline,data[i].URL, data[i].Image, data[i].Category,data[i].Gen_summary));
+                                if (i == data.length - 1) {
+                                    $('.well').append(div);
+                                }
+                                itemsPerwell = 1;
+                                }
+                            }
+                    console.log(response);
+                    },
+        error: function(error) {
+            console.log(error);
+            }
+            });
+        })
+        </script>
+        <div class="well">
+        <div class="col-sm-4 col-md-4">
+        <div class="thumbnail"><img src="static/img/News.png" data-holder-rendered="true" style="height: 150px; width: 150px; display: block"></img>
+        <div class="caption">
+           <h3> Read Today's Summaries for the Category News </h3> 
+            <p> Hi </p>
+        
+        </div>
+        </div>
+        </div>
+        </div>
+        
+        
+
+    </body>
+</html>
